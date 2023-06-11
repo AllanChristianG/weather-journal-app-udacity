@@ -1,17 +1,36 @@
-const express = require('express');
+'use strict'
+
+import express from 'express';
+import bodyParser from 'body-parser'
+// import cors from 'cors'
 const app = express();
-const Server = require('http').Server;
-const server = new Server(app);
-
-const bearerToken = '4bf2928c6cab72dc536719d0a75eff85'
-
 const port = 8080;
 
-app.get('/', (req, res) => {
-    res.send('hello')
+//Middleware
+app.use(bodyParser.urlencoded({extended: false}))
+
+//Project data object
+let projectData = {}
+
+//Load page render
+app.use(express.static('website'))
+
+//GET route
+app.get('/all', (req, res) => {
+    res.send(projectData)
 })
 
-server.listen(port, () => {
-    console.log(`Listening on port: ${port}`)
+//POST route
+app.post('/postData', (req, res) => {
+    projectData.temperature = req.body.temperature;
+    projectData.date = req.body.date;
+    projectData.userResponse = req.body.userResponse;
+    console.log(projectData)
+    res.send({message: 'Data added successfully!'})
 })
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+})
+
 
