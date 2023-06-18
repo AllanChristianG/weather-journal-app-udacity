@@ -18,9 +18,9 @@ const revealButton = document.querySelector('.reveal-button')
 
 
 textarea.addEventListener('input', () => {
-    // This updates textarea's rows based on scroll height
+    // This updates (hopefully) textarea's rows based on height
     textarea.rows = 1;
-    const rows = Math.ceil(textarea.scrollHeight / textarea.clientHeight);
+    const rows = Math.ceil(0.5 + (textarea.scrollHeight / textarea.clientHeight));
     textarea.rows = rows;
   });
 
@@ -40,6 +40,7 @@ weatherForm.addEventListener('submit', async (event) => {
         try {
             data = await response.json();
 
+            // Pass data parameters to postData
             postData('/postData', {
                 temperature: data.main.temp,
                 date: new Date().toLocaleDateString(),
@@ -49,7 +50,6 @@ weatherForm.addEventListener('submit', async (event) => {
                 local: data.name,
                 country: data.sys.country,
             });
-            console.log('DATA', data)
         } catch {
             console.log('Error was generated when fetching response')
         }
@@ -98,10 +98,10 @@ weatherForm.addEventListener('submit', async (event) => {
         const formatMinute = minute.toString().padStart(2, '0');
 
         try {
-            // Transform into JSON
+            // Try to transform into JSON
             const allData = await request.json()
 
-            // Write updated data to DOM elements
+            // And write updated data to DOM elements
             document.querySelector('.temp').innerHTML = Math.round(temperature);
             document.getElementById('feelings').innerHTML = userResponse;
             document.querySelector('.city').innerHTML = local;
@@ -111,7 +111,6 @@ weatherForm.addEventListener('submit', async (event) => {
             document.getElementById("icon").src = `https://openweathermap.org/img/wn/${icon}.png`
 
         } catch (error) {
-            // appropriately handle the error
             console.log("error", error);
         }
     }
