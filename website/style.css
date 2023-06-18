@@ -116,7 +116,7 @@ input:placeholder-shown {
     font-size: .8em;
 }
 
-#feelings {
+.feelings {
     display: flex;
     justify-content: center;
     align-items: center;

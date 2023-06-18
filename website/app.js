@@ -1,6 +1,6 @@
 'use strict'
 
-const apikey = '4bf2928c6cab72dc536719d0a75eff85';
+const apikey = '4bf2928c6cab72dc536719d0a75eff85&units=imperial';
 const baseURL = 'https://api.openweathermap.org/data/2.5';
 
 
@@ -15,6 +15,7 @@ textarea.cols = initialCols
 const formInput = document.querySelector(".form-input")
 const entryHolder = document.querySelector(".entry-holder")
 const revealButton = document.querySelector('.reveal-button')
+const generateButton = document.querySelector('#generate')
 
 
 textarea.addEventListener('input', () => {
@@ -26,16 +27,19 @@ textarea.addEventListener('input', () => {
 
 
 const weatherForm = document.querySelector('#weather-form')
-weatherForm.addEventListener('submit', async (event) => {
+generateButton.addEventListener('click', async (event) => {
     event.preventDefault();
     const formData = new FormData(weatherForm)
     const zip = formData.get('zip')
     const content = formData.get('content')
 
+
+    console.log(zip)
     let data = "";
 
     (async function getFetchData() {
-        const response = await fetch(`${baseURL}/weather?zip=${zip}&appid=${apikey}&units=imperial`)
+        console.log("APP")
+        const response = await fetch(`${baseURL}/weather?zip=${zip}&appid=${apikey}`)
 
         try {
             data = await response.json();
@@ -103,12 +107,12 @@ weatherForm.addEventListener('submit', async (event) => {
 
             // And write updated data to DOM elements
             document.querySelector('.temp').innerHTML = Math.round(temperature);
-            document.getElementById('feelings').innerHTML = userResponse;
+            document.querySelector('.feelings').innerHTML = userResponse;
             document.querySelector('.city').innerHTML = local;
             document.querySelector('.country').innerHTML = ` / ${country}`;
-            document.getElementById("date").innerHTML = `${month}, ${day} ${weekday} - ${formatHour}:${formatMinute}`
+            document.querySelector("#date").innerHTML = `${month}, ${day} ${weekday} - ${formatHour}:${formatMinute}`
             document.querySelector(".description").innerHTML = description.charAt(0).toUpperCase() + description.slice(1);
-            document.getElementById("icon").src = `https://openweathermap.org/img/wn/${icon}.png`
+            document.querySelector("#icon").src = `https://openweathermap.org/img/wn/${icon}.png`
 
         } catch (error) {
             console.log("error", error);

@@ -1,17 +1,20 @@
 'use strict'
 
-import express from 'express';
-// import bodyParser from 'body-parser'
-// import cors from 'cors'
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
 const app = express();
 const port = 8080;
 
-// Middleware
-// app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.json());
-
 // Project data object
 let projectData = {};
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(cors());
+
 
 // Load page render
 app.use(express.static('website'));
