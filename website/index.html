@@ -4,75 +4,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
     <title>Weather Journal</title>
 </head>
 <body>
-    <div class="form-input">
+    <div class="container">
         <form id="weather-form" class="weather-form">
             <div id='zip-box'>
-                <h3>Zip code</h3>
+                <h5>Zip code</h5>
                 <input 
                     type="text" 
                     name="zip" 
                     class='zip-code-input' 
                     id="zip" 
                     aria-label="zip-code" 
-                    placeholder="Enter ZIP code here">
+                    placeholder="Enter Zip code"
+                >
             </div>
             <div id='content-box'>
-                <h3>Content</h3>
-                <textarea name="content" id="feelings" cols="30" rows="10"></textarea>
+                <h5>Feeling</h5>
+                <textarea 
+                    name="content" 
+                    id="content" 
+                    cols="30" 
+                    placeholder="Feeling good"
+                    rows="10"
+                >
+                </textarea>
             </div>
-            <button id="generate"> Submit </button>
+            <button id="generate" class="generate-button"> Check Weather </button>
         </form>
+        
+        <div id="entry-holder" class="entry-holder">
+            <section class="local-date-group">
+                <div id="local">
+                    <span class="city">Sao Paulo /</span><span class="country">BR</span>
+                </div>
+                <div id="date">
+                    <span class="date">Jun, 20 - Sun </span>
+                </div>
+            </section>
+
+            <section class="icon-temp-group">
+                <div class="weather-icon">
+                    <img src="https://openweathermap.org/img/wn/10d@2x.png" id="icon" alt="test icon">
+
+                </div>
+                <div id="temp">
+                    <span class="temp">50</span><span class="temp-signal">º F</span>
+                </div>
+
+                <div id="description">
+                    <span class="description">Overcast Clouds</span>
+                </div>
+            </section>
+
+            <div id="feelings">
+                <span class="feelings"></span>
+            </div>
+        </div>
     </div>
-
-    <div id="entry-holder">
-        <div id="date">
-
-        </div>
-        <div id="temp">
-
-        </div>
-        <div id="content">
-
-        </div>
-    </div>
-
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        /* .form-input {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            border: 1px solid cornflowerblue;
-            margin: 250px 0; 
-        } */
-
-        .form-input {
-            text-align: center;
-        }
-
-        .weather-form {
-            width: fit-content;
-        }
-
-
-    </style>
-    
     <script src="./app.js"></script>
 </body>
 </html>

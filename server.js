@@ -1,36 +1,34 @@
 'use strict'
 
 import express from 'express';
-import bodyParser from 'body-parser'
+// import bodyParser from 'body-parser'
 // import cors from 'cors'
 const app = express();
 const port = 8080;
 
-//Middleware
-app.use(bodyParser.urlencoded({extended: false}))
+// Middleware
+// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
 
-//Project data object
-let projectData = {}
+// Project data object
+let projectData = {};
 
-//Load page render
-app.use(express.static('website'))
+// Load page render
+app.use(express.static('website'));
 
-//GET route
+// GET route
 app.get('/all', (req, res) => {
-    res.send(projectData)
-})
+  res.status(200).send(projectData);
+});
 
-//POST route
+// POST route
 app.post('/postData', (req, res) => {
-    projectData.temperature = req.body.temperature;
-    projectData.date = req.body.date;
-    projectData.userResponse = req.body.userResponse;
-    console.log(projectData)
-    res.send({message: 'Data added successfully!'})
-})
+  
+  // Store the data in projectData object
+  projectData = req.body;
+  res.status(200).send(projectData);
+});
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-})
-
-
+  console.log(`Server is running on port ${port}`);
+});
